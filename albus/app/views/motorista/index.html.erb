@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Motorista</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Cpf</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @motorista.each do |motoristum| %>
+      <tr>
+        <td><%= motoristum.nome %></td>
+        <td><%= motoristum.cpf %></td>
+        <td><%= motoristum.email %></td>
+        <td><%= motoristum.telefone %></td>
+        <td><%= link_to 'Show', motoristum %></td>
+        <td><%= link_to 'Edit', edit_motoristum_path(motoristum) %></td>
+        <td><%= link_to 'Destroy', motoristum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Motoristum', new_motoristum_path %>

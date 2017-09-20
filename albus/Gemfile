@@ -47,3 +47,23 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'poltergeist'
+  gem 'database_cleaner'
+  gem 'vcr'
+  gem 'webmock'
+end
+
+gem 'bootstrap-generators', '~> 3.3.4'
+gem 'acts-as-taggable-on' # tags para os feeds e para os itens (keywords)
+
+
+

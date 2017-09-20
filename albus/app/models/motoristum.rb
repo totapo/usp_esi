@@ -1,0 +1,2 @@
+class Motoristum < ApplicationRecord
+end
