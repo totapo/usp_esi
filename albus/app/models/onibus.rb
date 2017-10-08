@@ -1,2 +1,0 @@
-class Onibus < ApplicationRecord
-end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :onibuses
-  resources :motorista
-  resources :funcionarios
+  resources :buses
+  resources :drivers
+  resources :employees
   get 'home', to: 'application#index'
   get '/', to: 'application#index'
   root 'application#index'

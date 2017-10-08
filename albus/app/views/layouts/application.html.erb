@@ -18,7 +18,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if(!session[:id_usuario]) %>
+  <% if(!session[:id_user]) %>
      <%= render 'headbar_login' %>
    <% else %>
      <%= render 'headbar'%>

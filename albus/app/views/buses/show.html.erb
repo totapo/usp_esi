@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Placa:</strong>
+  <%= @bus.plate %>
+</p>
+
+<p>
+  <strong>Modelo:</strong>
+  <%= @bus.model %>
+</p>
+
+<p>
+  <strong>Número de Acentos:</strong>
+  <%= @bus.nSeats %>
+</p>
+
+<%= link_to 'Edit', edit_onibus_path(@bus) %> |
+<%= link_to 'Back', buses_path %>

@@ -10,30 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920141825) do
+ActiveRecord::Schema.define(version: 20171003210555) do
 
-  create_table "funcionarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "nome"
-    t.string   "cpf"
-    t.string   "email"
-    t.string   "telefone"
+  create_table "buses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "plate"
+    t.string   "model"
+    t.integer  "nSeats"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "motorista", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "nome"
+  create_table "drivers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
     t.string   "cpf"
     t.string   "email"
-    t.string   "telefone"
+    t.string   "telephone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "onibuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "placa"
-    t.string   "modelo"
-    t.integer  "nAcentos"
+  create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "cpf"
+    t.string   "email"
+    t.string   "telephone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

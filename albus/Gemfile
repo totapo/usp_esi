@@ -64,6 +64,4 @@ end
 
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'acts-as-taggable-on' # tags para os feeds e para os itens (keywords)
-
-
-
+gem 'coffee-script-source', '1.8.0'
