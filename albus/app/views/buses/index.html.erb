@@ -1,31 +1,21 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Ônibus</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Placa</th>
-      <th>Modelo</th>
-      <th>Número de Acentos</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @buses.each do |bus| %>
-      <tr>
-        <td><%= bus.plate %></td>
-        <td><%= bus.model %></td>
-        <td><%= bus.nSeats %></td>
-        <td><%= link_to 'Show', bus %></td>
-        <td><%= link_to 'Edit', edit_bus_path(bus) %></td>
-        <td><%= link_to 'Destroy', bus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class="list">
+  <h3>Ônibus</h3>
+  <% @buses.each do |bus| %>
+    <div class="item">
+      <div class="text left">
+        <h4>Placa: <%= bus.plate %></h4>
+        <p>Modelo: <%= bus.model %></p>
+        <p>Número de acentos: <%= bus.nSeats %></p>
+        <!--<a href="#" class="more">Find out more</a> </div>-->
+        <div class="cl">&nbsp;</div>
+      </div>
+    </div>
+  <% end %>
+  <div id="icons-container" class="item">
+    <div class="text left">
+      <%= link_to image_tag("add-bus.png", class: "icon"), new_bus_path %>
+    </div>
+  </div>
+</div>
 <br>
-
-<%= link_to 'Novo Onibus', new_bus_path %>

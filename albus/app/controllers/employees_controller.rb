@@ -28,8 +28,7 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to @employee, notice: 'Funcionario was successfully created.' }
-        format.json { render :show, status: :created, location: @employee }
+        format.html { redirect_to employees_url, notice: 'Funcionário foi criado com sucesso!' }
       else
         format.html { render :new }
         format.json { render json: @employee.errors, status: :unprocessable_entity }
@@ -56,7 +55,7 @@ class EmployeesController < ApplicationController
   def destroy
     @employee.destroy
     respond_to do |format|
-      format.html { redirect_to funcionarios_url, notice: 'Funcionario was successfully destroyed.' }
+      format.html { redirect_to employees_url, notice: 'Funcionario was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +68,6 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:name, :cpf, :email, :telephone)
+      params.require(:employee).permit(:password, :name, :cpf, :email, :telephone)
     end
 end

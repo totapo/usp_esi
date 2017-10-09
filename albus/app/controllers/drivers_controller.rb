@@ -4,7 +4,7 @@ class DriversController < ApplicationController
   # GET /motorista
   # GET /motorista.json
   def index
-    @driver = Driver.all
+    @drivers = Driver.all
   end
 
   # GET /motorista/1
@@ -28,8 +28,7 @@ class DriversController < ApplicationController
 
     respond_to do |format|
       if @driver.save
-        format.html { redirect_to @driver, notice: 'Driver was successfully created.' }
-        format.json { render :show, status: :created, location: @driver }
+        format.html { redirect_to drivers_path, notice: 'Driver was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @driver.errors, status: :unprocessable_entity }

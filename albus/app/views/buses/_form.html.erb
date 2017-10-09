@@ -1,32 +1,23 @@
-<%= form_for(bus) do |f| %>
-  <% if bus.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(bus.errors.count, "error") %> prohibited this onibus from being saved:</h2>
+<div class="mainw3-agileinfo form">
+	<div class="contact-w3lsleft">
+		<div class="contact-grid agileits">
+			<%= form_for(bus) do |f| %>
+        <% if bus.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(bus.errors.count, "error") %> prohibited this bus from being saved:</h2>
 
-      <ul>
-      <% bus.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :placa %>
-    <%= f.text_field :plate %>
-  </div>
-
-  <div class="field">
-    <%= f.label :modelo %>
-    <%= f.text_field :model %>
-  </div>
-
-  <div class="field">
-    <%= f.label :nAcentos %>
-    <%= f.number_field :nSeats %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+            <ul>
+            <% bus.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+				<%= f.text_field :plate, placeholder: "Placa", required: true %>
+        <%= f.text_field :model, placeholder: "Modelo", required: true %>
+        <%= f.number_field :nSeats, placeholder: "Número de Acentos", required: true %>
+				<%= f.submit "Cadastrar" %>
+			<% end %>
+		</div>
+	</div>
+</div>

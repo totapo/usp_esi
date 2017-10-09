@@ -5,6 +5,7 @@ class CreateEmployees < ActiveRecord::Migration[5.0]
       t.string :cpf
       t.string :email
       t.string :telephone
+      t.string :password
       t.timestamps
     end
   end

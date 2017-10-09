@@ -1,0 +1,12 @@
+<div class="mainw3-agileinfo form">
+	<div class="contact-w3lsleft">
+		<div class="contact-grid agileits">
+			<%= form_tag('/login') do %>
+        <%= text_field_tag :email, nil, placeholder: "E-mail", required: true %>
+        <%= password_field_tag :password, nil, placeholder: "Senha", required: true %>
+				<%= submit_tag "Login" %>
+				<p class="notice"><%= notice %><p>
+			<% end %>
+		</div>
+	</div>
+</div>

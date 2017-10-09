@@ -4,7 +4,7 @@ class BusesController < ApplicationController
   # GET /onibuses
   # GET /onibuses.json
   def index
-    @bus = Bus.all
+    @buses = Bus.all
   end
 
   # GET /onibuses/1
@@ -28,8 +28,7 @@ class BusesController < ApplicationController
 
     respond_to do |format|
       if @bus.save
-        format.html { redirect_to @bus, notice: 'Onibus was successfully created.' }
-        format.json { render :show, status: :created, location: @bus }
+        format.html { redirect_to buses_path, notice: 'Onibus was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @bus.errors, status: :unprocessable_entity }
@@ -68,7 +67,7 @@ class BusesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def onibus_params
+    def bus_params
       params.require(:bus).permit(:plate, :model, :nSeats)
     end
 end

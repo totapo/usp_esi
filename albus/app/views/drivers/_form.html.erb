@@ -1,37 +1,24 @@
-<%= form_for(driver) do |f| %>
-  <% if driver.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(driver.errors.count, "error") %> prohibited this driver from being saved:</h2>
+<div class="mainw3-agileinfo form">
+	<div class="contact-w3lsleft">
+		<div class="contact-grid agileits">
+			<%= form_for(driver) do |f| %>
+        <% if driver.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(driver.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
-      <ul>
-      <% driver.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :nome %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cpf %>
-    <%= f.text_field :cpf %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :telefone %>
-    <%= f.text_field :telephone %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+            <ul>
+            <% driver.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+				<%= f.text_field :name, placeholder: "Nome", required: true %>
+        <%= f.text_field :cpf, placeholder: "CPF", required: true %>
+        <%= f.text_field :email, placeholder: "Email", required: true %>
+        <%= f.text_field :telephone, placeholder: "Telefone", required: true %>
+				<%= f.submit "Cadastrar" %>
+			<% end %>
+		</div>
+	</div>
+</div>
