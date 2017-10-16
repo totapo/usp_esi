@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Street number:</strong>
+  <%= @spot.street_number %>
+</p>
+<p>
+  <strong>Route:</strong>
+  <%= @spot.route %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @spot.city %>
+</p>
+<p>
+  <strong>Country:</strong>
+  <%= @spot.country %>
+</p>
+<p>
+  <strong>Postal code:</strong>
+  <%= @spot.postal_code %>
+</p>
+
+<%= link_to 'Edit', edit_spot_path(@spot), class: "btn btn-lg btn-primary", :remote =>true  %>
+<%= link_to raw('Destroy <i class="icon-trash"></i>'), @spot, class: "btn btn-lg", method: "delete", data: { confirm: 'Are you sure?' }, :remote =>true %>

@@ -1,0 +1,11 @@
+// Clear the marker itself
+clearMarkerById(<%=@spot.id%>);
+
+// Close infowindow
+closeInfowindow();
+
+// Change the pane
+$("#contextual-panel").html( "<%=j(render :partial => 'destroy_side') %>");
+
+// Notify
+alert_user("Destroyed a spot in tha neighborhood!", "alert-info");

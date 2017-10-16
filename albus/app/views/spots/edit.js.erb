@@ -1,0 +1,5 @@
+// Open the edit form
+openInfowindow(
+    "<%= j(render :template => 'spots/edit.html.erb', :locals  => {:spot => @spot}) %>",
+    findById(<%=@spot.id%>)
+);
