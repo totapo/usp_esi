@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :drivers
   resources :employees
   resources :login
+  resources :spots
   get 'home', to: 'application#index'
   get '/', to: 'login#new'
   root 'login#new'
