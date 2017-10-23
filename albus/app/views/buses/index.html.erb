@@ -1,21 +1,35 @@
-<p id="notice"><%= notice %></p>
-<div class="list">
-  <h3>Ônibus</h3>
-  <% @buses.each do |bus| %>
-    <div class="item">
-      <div class="text left">
-        <h4>Placa: <%= bus.plate %></h4>
-        <p>Modelo: <%= bus.model %></p>
-        <p>Número de acentos: <%= bus.nSeats %></p>
-        <!--<a href="#" class="more">Find out more</a> </div>-->
-        <div class="cl">&nbsp;</div>
-      </div>
-    </div>
-  <% end %>
-  <div id="icons-container" class="item">
-    <div class="text left">
-      <%= link_to image_tag("add-bus.png", class: "icon"), new_bus_path %>
+<% content_for :breadcrumbs do %>
+    <li class="breadcrumb-item active">
+      Ônibus
+    </li>
+<% end %>
+<div class="text left">
+  <%= link_to "Novo",new_bus_path, :class=>"btn btn-primary" %>
+</div>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+                <th>Placa</th>
+                <th>Modelo</th>
+                <th>Acentos</th>
+                <th colspan="3">Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= content_tag_for(:tr, @buses) do |bus| %>
+                <td><%= bus.plate %></td>
+                <td><%= bus.model %></td>
+                <td><%= bus.nSeats %></td>
+                <td><%= link_to 'Ver', bus %></td>
+            <td><%= link_to 'Editar', edit_bus_path(bus) %></td>
+            <td><%= button_to 'Deletar', bus, method: :delete, data: { confirm: 'Tem certeza?' }, class:"btn btn-danger btn-sm" %></td>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-<br>

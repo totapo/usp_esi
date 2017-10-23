@@ -1,6 +1,6 @@
-<div class="mainw3-agileinfo form">
+<!--<div class="mainw3-agileinfo form">
 	<div class="contact-w3lsleft">
-		<div class="contact-grid agileits">
+		<div class="contact-grid agileits">-->
 			<%= form_for(employee) do |f| %>
         <% if employee.errors.any? %>
           <div id="error_explanation">
@@ -13,13 +13,26 @@
             </ul>
           </div>
         <% end %>
-				<%= f.text_field :name, placeholder: "Nome", required: true %>
-				<%= f.password_field :password, placeholder: "Senha", required: true %>
-        <%= f.text_field :cpf, placeholder: "CPF", required: true %>
-        <%= f.text_field :email, placeholder: "Email", required: true %>
-        <%= f.text_field :telephone, placeholder: "Telefone", required: true %>
-				<%= f.submit "Cadastrar" %>
+				<div class="form-group">
+					<%= f.text_field :name, class: 'form-control', placeholder: "Nome", required: true %>
+				</div>
+				<div class="form-group">
+				<%= f.password_field :password, class: 'form-control', placeholder: "Senha", required: true %>
+				</div>
+				<div class="form-group">
+        <%= f.text_field :cpf, class: 'form-control', placeholder: "CPF", required: true %>
+				</div>
+				<div class="form-group">
+        <%= f.text_field :email, class: 'form-control', placeholder: "Email", required: true %>
+				</div>
+				<div class="form-group">
+        <%= f.text_field :telephone, class: 'form-control', placeholder: "Telefone", required: true %>
+				</div>
+				<div class="form-group">
+				<%= f.submit class:'form-control btn btn-primary' %>
+				</div>
+
 			<% end %>
-		</div>
+		<!--</div>
 	</div>
-</div>
+</div>-->

@@ -1,0 +1,25 @@
+<% content_for :breadcrumbs do %>
+    <li class="breadcrumb-item">
+      <%= link_to 'Motoristas', drivers_path%>
+    </li>
+    <li class="breadcrumb-item active">
+      Visualizar
+    </li>
+<% end %>
+
+<dl class="dl-horizontal">
+  <dt>Nome:</dt>
+  <dd><%= @driver.name %></dd>
+
+  <dt>CPF:</dt>
+  <dd><%= @driver.cpf %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= @driver.email %></dd>
+
+  <dt>Telefone:</dt>
+  <dd><%= @driver.telephone %></dd>
+  <%= link_to edit_driver_path(@driver), class: 'btn btn-primary' do %>
+    Editar
+  <% end %>
+</dl>

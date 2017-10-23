@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<div class="list">
+  <h3>Ônibus</h3>
+  <% @buses.each do |bus| %>
+    <div class="item">
+      <div class="text left">
+        <h4>Placa: <%= bus.plate %></h4>
+        <p>Modelo: <%= bus.model %></p>
+        <p>Número de acentos: <%= bus.nSeats %></p>
+        <!--<a href="#" class="more">Find out more</a> </div>-->
+        <div class="cl">&nbsp;</div>
+      </div>
+    </div>
+  <% end %>
+  <div id="icons-container" class="item">
+    <div class="text left">
+      <%= link_to image_tag("add-bus.png", class: "icon"), new_bus_path %>
+    </div>
+  </div>
+</div>
+<br>

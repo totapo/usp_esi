@@ -1,24 +1,18 @@
-<div class="mainw3-agileinfo form">
-	<div class="contact-w3lsleft">
-		<div class="contact-grid agileits">
-			<%= form_for(driver) do |f| %>
-        <% if driver.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(driver.errors.count, "error") %> prohibited this employee from being saved:</h2>
+<%= form_for(driver) do |f| %>
+  <% if driver.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(driver.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
-            <ul>
-            <% driver.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-				<%= f.text_field :name, placeholder: "Nome", required: true %>
-        <%= f.text_field :cpf, placeholder: "CPF", required: true %>
-        <%= f.text_field :email, placeholder: "Email", required: true %>
-        <%= f.text_field :telephone, placeholder: "Telefone", required: true %>
-				<%= f.submit "Cadastrar" %>
-			<% end %>
-		</div>
-	</div>
-</div>
+      <ul>
+      <% driver.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div class="form-group"><%= f.text_field :name, class: 'form-control', placeholder: "Nome", required: true %></div>
+  <div class="form-group"><%= f.text_field :cpf, class: 'form-control', placeholder: "CPF", required: true %></div>
+  <div class="form-group"><%= f.text_field :email, class: 'form-control', placeholder: "Email", required: true %></div>
+  <div class="form-group"><%= f.text_field :telephone, class: 'form-control', placeholder: "Telefone", required: true %></div>
+	<div class="form-group"><%= f.submit class:'form-control btn btn-primary' %></div>
+<% end %>

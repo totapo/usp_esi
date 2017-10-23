@@ -18,3 +18,5 @@
 
 #ignore local_env.yml
 /config/local_env.yml
+
+/coverage

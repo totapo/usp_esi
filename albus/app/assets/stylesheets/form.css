@@ -7,11 +7,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 /*-- reset --*/
 /*-- end reset --*/
 /*-- main --*/
+/*
 .mainw3-agileinfo {
     width: 50%;
     margin: 0 auto;
 }
-/*-- contact --*/
+/*-- contact --
 .contact-w3left {
     text-align: center;
 }
@@ -71,7 +72,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 }
 /*-- //contact --*/
 /*-- //main --*/
-/*-- copyright --*/
+/*-- copyright --
 .w3copyright-agile{
     margin: 2em 0;
     text-align: center;
@@ -98,14 +99,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   text-align: center;
 }
 
-/*-- //copyright --*/
+/*-- //copyright --
 ::-webkit-input-placeholder {
 	color: #fff;
 }
-:-moz-placeholder { /* Firefox 18- */
+:-moz-placeholder { /* Firefox 18-
    color: #fff;
 }
-::-moz-placeholder {  /* Firefox 19+ */
+::-moz-placeholder {  /* Firefox 19+
    color: #fff;
 }
 :-ms-input-placeholder {
@@ -113,7 +114,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 }
 
 
-/*--responsive--*/
+/*--responsive--
 
 @media(max-width: 1680px){
 
@@ -264,5 +265,5 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		padding: .8em 3em;
 	}
 }
-
+*/
 /*--//responsive--*/

@@ -1,0 +1,13 @@
+<% content_for :breadcrumbs do %>
+    <li class="breadcrumb-item">
+      <%= link_to 'Funcionários', employees_path%>
+    </li>
+    <li class="breadcrumb-item active">
+      Editar
+    </li>
+<% end %>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= render 'form', employee: @employee %>
+  </div>
+</div> 

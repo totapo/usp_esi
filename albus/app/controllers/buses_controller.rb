@@ -1,5 +1,5 @@
 class BusesController < ApplicationController
-  before_action :set_buses, only: [:show, :edit, :update, :destroy]
+  before_action :set_bus, only: [:show, :edit, :update, :destroy]
 
   # GET /onibuses
   # GET /onibuses.json
@@ -40,7 +40,7 @@ class BusesController < ApplicationController
   # PATCH/PUT /onibuses/1.json
   def update
     respond_to do |format|
-      if @bus.update(onibus_params)
+      if @bus.update(bus_params)
         format.html { redirect_to @bus, notice: 'Bus was successfully updated.' }
         format.json { render :show, status: :ok, location: @bus }
       else
@@ -55,7 +55,7 @@ class BusesController < ApplicationController
   def destroy
     @bus.destroy
     respond_to do |format|
-      format.html { redirect_to onibuses_url, notice: 'Bus was successfully destroyed.' }
+      format.html { redirect_to buses_url, notice: 'Bus was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

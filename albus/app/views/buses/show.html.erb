@@ -1,0 +1,22 @@
+<% content_for :breadcrumbs do %>
+    <li class="breadcrumb-item">
+      <%= link_to 'Ônibus', buses_path%>
+    </li>
+    <li class="breadcrumb-item active">
+      Visualizar
+    </li>
+<% end %>
+
+<dl class="dl-horizontal">
+  <dt>Placa:</dt>
+  <dd><%= @bus.plate %></dd>
+
+  <dt>Modelo:</dt>
+  <dd><%= @bus.model %></dd>
+
+  <dt>Acentos:</dt>
+  <dd><%= @bus.nSeats %></dd>
+  <%= link_to edit_bus_path(@bus), class: 'btn btn-primary' do %>
+    Editar
+  <% end %>
+</dl>

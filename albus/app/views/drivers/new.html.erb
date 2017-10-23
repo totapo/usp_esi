@@ -1,5 +1,13 @@
-<h1>Novo Motorista</h1>
-
-<%= render 'form', driver: @driver %>
-
-<%= link_to 'Back', drivers_path %>
+<% content_for :breadcrumbs do %>
+    <li class="breadcrumb-item">
+      <%= link_to 'Motoristas', drivers_path%>
+    </li>
+    <li class="breadcrumb-item active">
+      Novo
+    </li>
+<% end %>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= render 'form', driver: @driver %>
+  </div>
+</div>

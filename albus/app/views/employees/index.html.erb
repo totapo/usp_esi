@@ -1,21 +1,37 @@
-<p id="notice"><%= notice %></p>
-<div class="list">
-  <h3>Funcionários</h3>
-  <% @employees.each do |employee| %>
-    <div class="item">
-      <div class="text left">
-        <h4><%= employee.name %></h4>
-        <p><%= employee.email %></p>
-        <p><%= employee.telephone %></p>
-        <!--<a href="#" class="more">Find out more</a> </div>-->
-        <div class="cl">&nbsp;</div>
-      </div>
-    </div>
-  <% end %>
-  <div id="icons-container" class="item">
-    <div class="text left">
-      <%= link_to image_tag("add-user.png", class: "icon"), new_employee_path %>
+<% content_for :breadcrumbs do %>
+    <li class="breadcrumb-item active">
+      Funcionários
+    </li>
+<% end %>
+<div class="text left">
+  <%= link_to "Novo",new_employee_path, :class=>"btn btn-primary" %>
+</div>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>CPF</th>
+                <th colspan="3">Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= content_tag_for(:tr, @employees) do |employee| %>
+                <td><%= employee.name %></td>
+                <td><%= employee.email %></td>
+                <td><%= employee.telephone %></td>
+                <td><%= employee.cpf %></td>
+                <td><%= link_to 'Ver', employee %></td>
+            <td><%= link_to 'Editar', edit_employee_path(employee) %></td>
+            <td><%= button_to 'Deletar', employee, method: :delete, data: { confirm: 'Tem certeza?' },class:"btn btn-danger btn-sm" %></td>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-<br>

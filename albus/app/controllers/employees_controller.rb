@@ -40,7 +40,7 @@ class EmployeesController < ApplicationController
   # PATCH/PUT /funcionarios/1.json
   def update
     respond_to do |format|
-      if @employee.update(funcionario_params)
+      if @employee.update(employee_params)
         format.html { redirect_to @employee, notice: 'Funcionario was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else

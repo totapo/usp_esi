@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<div class="list">
+  <h3>Motoristas</h3>
+  <% @drivers.each do |driver| %>
+    <div class="item">
+      <div class="text left">
+        <h4><%= driver.name %></h4>
+        <p><%= driver.email %></p>
+        <p><%= driver.telephone %></p>
+        <!--<a href="#" class="more">Find out more</a> </div>-->
+        <div class="cl">&nbsp;</div>
+      </div>
+    </div>
+  <% end %>
+  <div id="icons-container" class="item">
+    <div class="text left">
+      <%= link_to image_tag("add-user.png", class: "icon"), new_driver_path %>
+    </div>
+  </div>
+</div>
+<br>

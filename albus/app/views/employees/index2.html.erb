@@ -1,0 +1,27 @@
+<% content_for :breadcrumbs do %>
+    <li class="breadcrumb-item active">
+      Funcionários
+    </li>
+<% end %>
+<p id="notice"><%= notice %></p>
+<div class="list">
+  <% @employees.each do |employee| %>
+    <div class="item">
+      <div class="text left">
+        <h4><%= employee.name %></h4>
+        <p><%= employee.email %></p>
+        <p><%= employee.telephone %></p>
+        <p><%= link_to 'Edit', edit_employee_path(employee) %></p>
+        <p><%= link_to 'Deletar', employee, method: :delete, data: { confirm: 'Você tem certeza?' } %></p>
+        <!--<a href="#" class="more">Find out more</a> </div>-->
+        <div class="cl">&nbsp;</div>
+      </div>
+    </div>
+  <% end %>
+  <div id="icons-container" class="item">
+    <div class="text left">
+      <%= link_to image_tag("add-user.png", class: "icon"), new_employee_path %>
+    </div>
+  </div>
+</div>
+<br>
