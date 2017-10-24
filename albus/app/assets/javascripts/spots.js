@@ -98,7 +98,6 @@ function loadSpots(){
     var lng = parseFloat(this.getAttribute("lng"));
     var id = parseInt(this.getAttribute("id"))
     var latlng = {lat:lat,lng:lng}
-
     createMarker(latlng,id,function(marcador){
       spots[marcador.get('spot_id')]=marcador;
     });

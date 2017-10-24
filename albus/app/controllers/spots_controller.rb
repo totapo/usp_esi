@@ -2,7 +2,6 @@ class SpotsController < ApplicationController
   def index
     @spots=Spot.all.order(:id)
     @lines=Line.all.order(:id)
-    render layout: "applayout"
   end
 
   def create
