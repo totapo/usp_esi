@@ -10,6 +10,9 @@ class BusesController < ApplicationController
   # GET /onibuses/1
   # GET /onibuses/1.json
   def show
+    if @bus==nil
+      redirect_to buses_path, notice: 'Bus not found.'
+    end
   end
 
   # GET /onibuses/new
@@ -28,7 +31,7 @@ class BusesController < ApplicationController
 
     respond_to do |format|
       if @bus.save
-        format.html { redirect_to buses_path, notice: 'Onibus was successfully created.' }
+        format.html { redirect_to buses_path, notice: 'Bus was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @bus.errors, status: :unprocessable_entity }
@@ -40,7 +43,9 @@ class BusesController < ApplicationController
   # PATCH/PUT /onibuses/1.json
   def update
     respond_to do |format|
-      if @bus.update(bus_params)
+      if(@bus==nil)
+        format.html { redirect_to buses_path, notice: 'Bus id not found' }
+      elsif @bus.update(bus_params)
         format.html { redirect_to @bus, notice: 'Bus was successfully updated.' }
         format.json { render :show, status: :ok, location: @bus }
       else
@@ -63,7 +68,7 @@ class BusesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bus
-      @bus = Bus.find(params[:id])
+      @bus = Bus.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

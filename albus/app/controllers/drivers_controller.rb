@@ -10,6 +10,9 @@ class DriversController < ApplicationController
   # GET /motorista/1
   # GET /motorista/1.json
   def show
+    if(@driver==nil)
+      redirect_to drivers_path, notice: 'Driver id not found'
+    end
   end
 
   # GET /motorista/new
@@ -40,7 +43,9 @@ class DriversController < ApplicationController
   # PATCH/PUT /motorista/1.json
   def update
     respond_to do |format|
-      if @driver.update(driver_params)
+      if(@driver==nil)
+        format.html { redirect_to drivers_path, notice: 'Driver id not found' }
+      elsif @driver.update(driver_params)
         format.html { redirect_to @driver, notice: 'Driver was successfully updated.' }
         format.json { render :show, status: :ok, location: @driver }
       else
@@ -63,7 +68,7 @@ class DriversController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_driver
-      @driver = Driver.find(params[:id])
+      @driver = Driver.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

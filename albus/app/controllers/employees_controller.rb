@@ -10,6 +10,9 @@ class EmployeesController < ApplicationController
   # GET /funcionarios/1
   # GET /funcionarios/1.json
   def show
+    if(@employee==nil)
+      redirect_to employees_path, notice: 'Employee id not found' 
+    end
   end
 
   # GET /funcionarios/new
@@ -40,7 +43,9 @@ class EmployeesController < ApplicationController
   # PATCH/PUT /funcionarios/1.json
   def update
     respond_to do |format|
-      if @employee.update(employee_params)
+      if(@employee==nil)
+        format.html { redirect_to employees_path, notice: 'Employee id not found' }
+      elsif @employee.update(employee_params)
         format.html { redirect_to @employee, notice: 'Funcionario was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else
@@ -63,7 +68,7 @@ class EmployeesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
-      @employee = Employee.find(params[:id])
+      @employee = Employee.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

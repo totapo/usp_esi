@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "drivers/index", type: :view do
   before(:each) do
     assign(:drivers, [
-      Driver.create!(),
-      Driver.create!()
+      create(:driver),
+      create(:driver)
     ])
   end
 

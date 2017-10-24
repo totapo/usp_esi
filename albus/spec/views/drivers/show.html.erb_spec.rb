@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "drivers/show", type: :view do
   before(:each) do
-    @driver = assign(:driver, Driver.create!())
+    @driver = create(:driver)
   end
 
   it "renders attributes in <p>" do

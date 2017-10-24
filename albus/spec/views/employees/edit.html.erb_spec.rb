@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "employees/edit", type: :view do
   before(:each) do
-    @employee = assign(:employee, Employee.create!())
+    @employee = create(:employee)
   end
 
   it "renders the edit employee form" do
