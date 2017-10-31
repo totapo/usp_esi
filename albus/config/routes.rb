@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/', to: 'login#new'
   root 'login#new'
   get 'main', to: 'application#main'
+  get 'services/stops', to: 'services#stops'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
