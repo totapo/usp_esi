@@ -87,7 +87,7 @@ function loadSpots(){
       createMarker(latlng,id,address,function(marcador){
         spots[marcador.get('spot_id')]=marcador;
       })
-    }, 1000*i);
+    }, 100*i);
     i++;
   });
 }
