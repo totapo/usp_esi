@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :spots
   get 'lines', to: 'lines#index'
   post 'lines', to: 'lines#create'
-  put 'lines', to: 'lines#update'
+  put 'lines/:id', to: 'lines#update'
+  get 'lines/:id', to: 'lines#show'
+  delete 'lines/:id', to: 'lines#destroy'
   get 'home', to: 'application#index'
   get '/', to: 'login#new'
   root 'login#new'
