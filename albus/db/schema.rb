@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024104121) do
+ActiveRecord::Schema.define(version: 20171126004153) do
 
   create_table "buses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "plate"
@@ -40,11 +40,37 @@ ActiveRecord::Schema.define(version: 20171024104121) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "funcionarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.string   "cpf"
+    t.string   "email"
+    t.string   "telefone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_lines_on_name", unique: true, using: :btree
+  end
+
+  create_table "motorista", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.string   "cpf"
+    t.string   "email"
+    t.string   "telefone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "onibuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "placa"
+    t.string   "modelo"
+    t.integer  "nAcentos"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "routes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -60,6 +86,7 @@ ActiveRecord::Schema.define(version: 20171024104121) do
     t.float    "longitude",  limit: 24
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.string   "address"
   end
 
 end

@@ -69,6 +69,7 @@ function getParadasSelecionadas(){
   for(count=0; count<route.length; count++){
     aux=new Object();
     aux.id = route[count].get('spot_id');
+    aux.address = route[count].get('spot_address');
     aux.lat = route[count].getPosition().lat();
     aux.lng = route[count].getPosition().lng();
     resp.push(aux);
@@ -91,54 +92,63 @@ function initVariables(){
   counter=0;
   spots=new Array();
 }
-
+var i=0;
 function loadSpots(){
   $("#spots").children().each(function(){
     var lat = parseFloat(this.getAttribute("lat"));
     var lng = parseFloat(this.getAttribute("lng"));
     var id = parseInt(this.getAttribute("id"))
+    var address = this.getAttribute("add");
     var latlng = {lat:lat,lng:lng}
-    createMarker(latlng,id,function(marcador){
-      spots[marcador.get('spot_id')]=marcador;
-    });
+    setTimeout(function(){
+      createMarker(latlng,id,address,function(marcador){
+        spots[marcador.get('spot_id')]=marcador;
+      })
+    }, 1000*i);
+    i++;
   });
 }
 
-function createMarker(latlng, id,callBackFunction){
-  geocoder.geocode({'location': latlng}, function(results, status) {
-    if (status === 'OK') {
-      if (results[1]) {
-        var marcador = new google.maps.Marker({
-          position: latlng,
-          map: map,
+function createMarker(latlng, id, add,callBackFunction){
+  if(add){
+    var marcador = new google.maps.Marker({
+      position: latlng,
+      map: map,
 
-          //custom parameters
-          spot_address: results[1].formatted_address,
-          spot_id: id
-        });
+      //custom parameters
+      spot_address: add,
+      spot_id: id
+    });
 
-        //adiciona na rota (adicona repetidamente tb)
-        marcador.addListener('dblclick',function(evt){
-          addToRoute(marcador);
-        });
+    //adiciona na rota (adicona repetidamente tb)
+    marcador.addListener('dblclick',function(evt){
+      addToRoute(marcador);
+    });
 
-        //mostra infowindow
-        marcador.addListener('click',function(evt){
-          infowindow.setContent(marcador.get('spot_address'));
-          infowindow.open(map,marcador);
-        });
-        if(callBackFunction){
-          callBackFunction(marcador);
+    //mostra infowindow
+    marcador.addListener('click',function(evt){
+      infowindow.setContent(marcador.get('spot_address'));
+      infowindow.open(map,marcador);
+    });
+    if(callBackFunction){
+      callBackFunction(marcador);
+    }
+  } else {
+    geocoder.geocode({'location': latlng}, function(results, status) {
+      if (status === 'OK') {
+        if (results[0]) {
+          createMarker(latlng,id,results[0].formatted_address,callBackFunction)
+
+        } else {
+          window.alert('No results found');
+          return null;
         }
       } else {
-        window.alert('No results found');
+        window.alert('Geocoder failed due to: ' + status);
         return null;
       }
-    } else {
-      window.alert('Geocoder failed due to: ' + status);
-      return null;
-    }
-  });
+    });
+  }
 }
 
 function initMap() {
@@ -160,7 +170,7 @@ function initMap() {
     if(canAdd){
       canAdd=false;
       var latlng = event.latLng;
-      var marker = createMarker(latlng,-1,addToRoute);
+      var marker = createMarker(latlng,-1,null,addToRoute);
     }
   });
 

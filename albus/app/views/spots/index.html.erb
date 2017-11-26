@@ -13,7 +13,7 @@
 <% end %>
 <div id="spots" style="display: none;">
     <% @spots.each do |spot|%>
-      <%= content_tag(:p, "", id:(spot.id), lat:(spot.latitude), lng:(spot.longitude) ) %>
+      <%= content_tag(:p, "", id:(spot.id), lat:(spot.latitude), lng:(spot.longitude), add:(spot.address) ) %>
     <% end %>
 </div>
 

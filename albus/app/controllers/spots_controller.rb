@@ -13,10 +13,15 @@ class SpotsController < ApplicationController
       params[:stops].each do |order,object|
         if(Integer(object[:id])>0)
           @stopAux = Spot.find(object[:id])
+          if(@stopAux.address==nil)
+            @stopAux.address = object[:address]
+            @stopAux.save
+          end
         else
           @stopAux = Spot.new
           @stopAux.latitude = Float(object[:lat])
           @stopAux.longitude = Float(object[:lng])
+          @stopAux.address = object[:address]
           @stopAux.save
         end
 
