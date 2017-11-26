@@ -15,50 +15,33 @@ var counter; //conta as posicoes preenchidas em rote (n elementos)
 var edit;
 
 
-$('#lista_sem_padding').on("click", "a#upPoint",function(e) {e.preventDefault(); moveUp(e.target);return false;})
-$('#lista_sem_padding').on("click", "a#downPoint",function(e) {e.preventDefault(); moveDown(e.target); return false;});
 $('#lista_sem_padding').on("click", "a#remPoint",function(e) {e.preventDefault(); removePoint(e.target); return false;});
 $('#lista_sem_padding').on("click", "a#centerPoint",function(e) {e.preventDefault(); centerIn(e.target); return false;});
 
-$('#addRout').on('click', function(e){
+$('#addSpots').on('click', function(e){
   e.preventDefault();
-  var n=$('#route_name').val();
   var paradas = getParadasSelecionadas();
 
-  if(n && n.trim().length>0 && paradas.length>1){
-    if(edit==true){
-      //TODO fazer o request de edição da rota
-    } else {
-        $.ajax({
-              url:'/spots',
-              type:'POST',
-              dataType:'json',
-              data:{
-                  route:{
-                    name: n
-                  },
-                  stops:paradas,
-                  authenticity_token: window._token
-              },
-              success:function(data){
-                window.location.reload(true);
-              },
-              error:function(data){
-                window.alert("Erro no servidor!")
-              }
-          });
-      }
+  if(paradas.length>0){
+      $.ajax({
+            url:'/spots',
+            type:'POST',
+            dataType:'json',
+            data:{
+                stops:paradas,
+                authenticity_token: window._token
+            },
+            success:function(data){
+              window.location.reload(true);
+            },
+            error:function(data){
+              window.alert("Erro no servidor!")
+            }
+        });
   } else {
-    window.alert("Rota inválida!")
+    window.alert("Nenhum ponto de parada adicionado!")
   }
 
-  return false;
-});
-
-$('#drawRoute').on('click', function(e){
-  e.preventDefault();
-  resetDisplayedRoutes();
-  drawRoute();
   return false;
 });
 
@@ -122,7 +105,7 @@ function createMarker(latlng, id, add,callBackFunction){
 
     //adiciona na rota (adicona repetidamente tb)
     marcador.addListener('dblclick',function(evt){
-      addToRoute(marcador);
+      addToPanel(marcador);
     });
 
     //mostra infowindow
@@ -170,7 +153,7 @@ function initMap() {
     if(canAdd){
       canAdd=false;
       var latlng = event.latLng;
-      var marker = createMarker(latlng,-1,null,addToRoute);
+      var marker = createMarker(latlng,-1,null,addToPanel);
     }
   });
 
@@ -179,7 +162,7 @@ function initMap() {
   loadSpots();
 }
 
-function addToRoute(marker){
+function addToPanel(marker){
   if(marker){
     infowindow.setContent(marker.get('spot_address'));
     infowindow.open(map, marker);
@@ -202,25 +185,10 @@ function appendPointTo(address,pos){
         address.substr(0,20)+'...'+
       '</a>'+
       '<div class="pull-right action-buttons" id="botoes_lista">'+
-          '<a href="" id="upPoint" listposition="'+pos+'" role="button"><i class="fa fa-level-up fa-fw" listposition="'+pos+'"></i></a>'+
-          '<a href="" id="downPoint" listposition="'+pos+'" role="button"><i class="fa fa-level-down fa-fw" listposition="'+pos+'"></i></a>'+
-          '<a href="" id="remPoint" listposition="'+pos+'" role="button"><i class="fa fa-window-close-o fa-fw" listposition="'+pos+'"></i></a>'+
+        '<a href="" id="remPoint" listposition="'+pos+'" role="button" class="btn btn-danger btn-sm"><i class="fa fa-window-close-o fa-fw" listposition="'+pos+'"></i></a>'+
       '</div>'+
     '</li>'
   );
-}
-
-function moveUp(dom){
-  var pos = parseInt(dom.getAttribute("listposition"));
-  if(pos>0){
-    var auxM = route[pos];
-
-    route[pos]=route[pos-1];
-
-    route[pos-1]=auxM;
-
-    refreshList();
-  }
 }
 
 function refreshList(){
@@ -228,19 +196,6 @@ function refreshList(){
   var cnt;
   for(cnt=0; cnt<route.length; cnt++){
     appendPointTo(route[cnt].get('spot_address'),cnt);
-  }
-}
-
-function moveDown(dom){
-  var pos = parseInt(dom.getAttribute("listposition"));
-  if(pos<counter-1){
-    var auxM = route[pos];
-
-    route[pos]=route[pos+1];
-
-    route[pos+1]=auxM;
-
-    refreshList();
   }
 }
 
@@ -258,11 +213,25 @@ function removePoint(dom) {
 
       //destroi o marcador no mapa se ele foi adicionado (nao possui spot_id)
       var mark = route[pos];
-      if(parseInt(mark.get('spot_id'))<0){
-          mark.setMap(null);
-          mark=null;
+      if(parseInt(mark.get('spot_id'))>=0){
+        $.ajax({
+          type: "POST",
+          url: "/spots/" + mark.get('spot_id'),
+          dataType: "json",
+          data: {"_method":"delete",
+                  authenticity_token: window._token},
+          success:function(data){
+            //do nothing TODO
+          },
+          error:function(data){
+            window.alert("Erro no servidor!");
+            window.location.reload(true);
+          }
+        });
       }
 
+      mark.setMap(null);
+      mark=null;
       //sobe os elementos antigos um nivel
       for(a=pos; a<route.length-1; a++){
         route[a]=route[a+1];
@@ -274,93 +243,4 @@ function removePoint(dom) {
 
       refreshList();
     }
-    /*if(counter >0){
-
-    }
-    canAdd=true;*/
-}
-
-function changeRoute(sel){
-    var op = sel.options[sel.selectedIndex];
-    var id = parseInt(op.getAttribute('lineid'));
-    if(id<0){
-      edit=false;
-      $('#route_name').val("");
-      $('#addRout').text("Adicionar");
-      route=[];
-      refreshList();
-    } else {
-      edit=true;
-      setScreen(true); //disables buttons and select
-      $('#route_name').val(op.innerHTML+"");
-      $('#addRout').text("Editar");
-      $.ajax({
-            url:'/spots/'+id,
-            type:'GET',
-            dataType:'json',
-            success:function(data){
-              var cnt;
-              route=[];
-              for(cnt=0; cnt<data.length; cnt++){
-                route.push(spots[data[cnt]['spot_id']]);
-              }
-              refreshList();
-              setScreen(false);
-              resetDisplayedRoutes();
-              drawRoute();
-            },
-            error:function(data){
-              setScreen(false);
-              window.alert("Erro no servidor!");
-            }
-        });
-    }
-}
-
-function setScreen(bool){
-  $('#select_route').attr('disabled',bool);
-  if(bool){
-    $('#addRout').removeAttr('href');
-    $('#remRout').removeAttr('href');
-  } else {
-    $('#addRout').attr('href',"");
-    $('#remRout').attr('href',"");
-  }
-}
-//directions api
-var directionsDisplay;
-var directionsService;
-
-function resetDisplayedRoutes(){
-  directionsDisplay.setMap(null); // clear direction from the map
-  directionsDisplay.setPanel(null); // clear directionpanel from the map
-  directionsDisplay = new google.maps.DirectionsRenderer(); // this is to render again, otherwise your route wont show for the second time searching
-  directionsDisplay.setMap(map); //this is to set up again
-}
-
-function drawRoute() {
-  if(route.length>1){
-    var waypts = [];
-    for (var i = 1; i < route.length-1; i++) {
-      waypts.push({
-        location: route[i].getPosition(),
-        stopover: true
-      });
-    }
-    directionsDisplay.setOptions({suppressMarkers: true})
-
-    directionsService.route({
-      origin: route[0].getPosition(),
-      destination: route[route.length-1].getPosition(),
-      waypoints: waypts,
-      optimizeWaypoints: true,
-      travelMode: 'DRIVING'
-    }, function(response, status) {
-      if (status === 'OK') {
-        directionsDisplay.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
-  }
 }

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :employees
   resources :login
   resources :spots
+  get 'lines', to: 'lines#index'
+  post 'lines', to: 'lines#create'
+  put 'lines', to: 'lines#update'
   get 'home', to: 'application#index'
   get '/', to: 'login#new'
   root 'login#new'
