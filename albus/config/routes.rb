@@ -4,18 +4,15 @@ Rails.application.routes.draw do
   resources :employees
   resources :login
   resources :spots
-<<<<<<< HEAD
   post 'select_driver', to:'buses#select_driver'
   post 'select_line', to:'buses#select_line'
   post 'remove_line', to:'buses#remove_line'
   post 'remove_driver', to:'buses#remove_driver'
-=======
   get 'lines', to: 'lines#index'
   post 'lines', to: 'lines#create'
   put 'lines/:id', to: 'lines#update'
   get 'lines/:id', to: 'lines#show'
   delete 'lines/:id', to: 'lines#destroy'
->>>>>>> 264fb21029a3e4de4b767677f63da750d3ac8175
   get 'home', to: 'application#index'
   get '/', to: 'login#new'
   get 'logout', to: 'login#logout'

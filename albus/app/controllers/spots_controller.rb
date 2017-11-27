@@ -1,10 +1,6 @@
 class SpotsController < ApplicationController
-<<<<<<< HEAD
-
   before_action :authorize, except: [:new, :create]
-=======
   before_action :set_spot, only: [:destroy]
->>>>>>> 264fb21029a3e4de4b767677f63da750d3ac8175
 
   def index
     @spots=Spot.all.order(:id)
