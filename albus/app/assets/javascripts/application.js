@@ -17,4 +17,4 @@
 //= require vendor/bootstrap/js/bootstrap.bundle.min
 //= require vendor/jquery-easing/jquery.easing.min
 //= require js/sb-admin.min
-//= require_tree .
+//= require_tree ./application
