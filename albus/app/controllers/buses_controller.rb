@@ -1,8 +1,10 @@
 class BusesController < ApplicationController
   before_action :set_bus, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, except: [:new, :create]
 
   # GET /onibuses
   # GET /onibuses.json
+
   def index
     @buses = Bus.all
   end
@@ -11,8 +13,14 @@ class BusesController < ApplicationController
   # GET /onibuses/1.json
   def show
     if @bus==nil
-      redirect_to buses_path, notice: 'Bus not found.'
+      redirect_to buses_path, notice: 'Ônibus não encontrado.'
     end
+    @drivers = Driver.all
+    @lines = Line.all
+    @driver = @bus.driver
+    @line = @bus.line
+    @showDrivers = params[:show_drivers]
+    @showLines = params[:show_lines]
   end
 
   # GET /onibuses/new
@@ -62,6 +70,68 @@ class BusesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to buses_url, notice: 'Bus was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def select_driver
+    respond_to do |format|
+      @bus = Bus.find(params[:bus_id])
+      @driver = Driver.find(params[:driver_id])
+      @bus.driver = @driver
+
+      if @bus.save
+        format.html { redirect_to @bus, notice: 'Motorista selecionado com sucesso!' }
+        format.json { head :no_content }
+      else
+        format.html { render :edit }
+        format.json { render json: @bus.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def select_line
+    respond_to do |format|
+      @bus = Bus.find(params[:bus_id])
+      @line = Line.find(params[:line_id])
+      @bus.line = @line
+
+      if @bus.save
+        format.html { redirect_to @bus, notice: 'Motorista selecionado com sucesso!' }
+        format.json { head :no_content }
+      else
+        format.html { render :edit }
+        format.json { render json: @bus.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_driver
+    respond_to do |format|
+      @bus = Bus.find(params[:bus_id])
+      @bus.driver = nil
+
+      if @bus.save
+        format.html { redirect_to @bus, notice: 'Motorista retirado com sucesso!' }
+        format.json { head :no_content }
+      else
+        format.html { render :edit }
+        format.json { render json: @bus.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_line
+    respond_to do |format|
+      @bus = Bus.find(params[:bus_id])
+      @bus.line = nil
+
+      if @bus.save
+        format.html { redirect_to @bus, notice: 'Motorista retirado com sucesso!' }
+        format.json { head :no_content }
+      else
+        format.html { render :edit }
+        format.json { render json: @bus.errors, status: :unprocessable_entity }
+      end
     end
   end
 

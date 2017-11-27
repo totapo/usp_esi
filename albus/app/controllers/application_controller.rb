@@ -5,4 +5,10 @@ class ApplicationController < ActionController::Base
     render 'index'
   end
 
+  def authorize
+    unless session[:user_id]
+      redirect_to root_url
+    end
+  end
+
 end

@@ -19,77 +19,80 @@
   <script src="https://use.fontawesome.com/0dc9eeca2d.js"></script>
 </head>
 <body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="index.html">Albus</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Funcionários">
-              <%= link_to employees_path, :class=>"nav-link" do %>
-                <i class="fa fa-fw fa-address-book"></i>
-                <span class="nav-link-text">Funcionários</span>
-              <% end %>
-              <!--<li><%=link_to "Motoristas", drivers_path %></li>
-              <li><%=link_to "Ônibus", buses_path %></li>-->
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Motoristas">
-            <%= link_to drivers_path, :class=>"nav-link" do %>
-              <i class="fa fa-fw fa-drivers-license"></i>
-              <span class="nav-link-text">Motoristas</span>
-            <% end %>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ônibus">
-            <%= link_to buses_path, :class=>"nav-link" do %>
-              <i class="fa fa-fw fa-bus"></i>
-              <span class="nav-link-text">Ônibus</span>
-            <% end %>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Rotas">
-            <%= link_to spots_path, :class=>"nav-link" do %>
-              <i class="fa fa-fw fa-road"></i>
-              <span class="nav-link-text">Rotas</span>
-            <% end %>
-            <!--<ul class="sidenav-second-level collapse" id="collapseComponents">
-              <li>
-                <a href="navbar.html">Navbar</a>
-              </li>
-              <li>
-                <a href="cards.html">Cards</a>
-              </li>
-            </ul>-->
-          </li>
-        </ul>
-        <ul class="navbar-nav sidenav-toggler">
-          <li class="nav-item">
-            <a class="nav-link text-center" id="sidenavToggler">
-              <i class="fa fa-fw fa-angle-left"></i>
-            </a>
-          </li>
-        </ul>
-        <!-- top bar -->
-        <ul class="navbar-nav ml-auto">
 
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0 mr-lg-2">
-              <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </span>
-              </div>
-            </form>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-              <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  <% if session[:user_id] %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="index.html">Albus</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Funcionários">
+                <%= link_to employees_path, :class=>"nav-link" do %>
+                  <i class="fa fa-fw fa-address-book"></i>
+                  <span class="nav-link-text">Funcionários</span>
+                <% end %>
+                <!--<li><%=link_to "Motoristas", drivers_path %></li>
+                <li><%=link_to "Ônibus", buses_path %></li>-->
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Motoristas">
+              <%= link_to drivers_path, :class=>"nav-link" do %>
+                <i class="fa fa-fw fa-drivers-license"></i>
+                <span class="nav-link-text">Motoristas</span>
+              <% end %>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ônibus">
+              <%= link_to buses_path, :class=>"nav-link" do %>
+                <i class="fa fa-fw fa-bus"></i>
+                <span class="nav-link-text">Ônibus</span>
+              <% end %>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Rotas">
+              <%= link_to spots_path, :class=>"nav-link" do %>
+                <i class="fa fa-fw fa-road"></i>
+                <span class="nav-link-text">Rotas</span>
+              <% end %>
+              <!--<ul class="sidenav-second-level collapse" id="collapseComponents">
+                <li>
+                  <a href="navbar.html">Navbar</a>
+                </li>
+                <li>
+                  <a href="cards.html">Cards</a>
+                </li>
+              </ul>-->
+            </li>
+          </ul>
+          <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+              <a class="nav-link text-center" id="sidenavToggler">
+                <i class="fa fa-fw fa-angle-left"></i>
+              </a>
+            </li>
+          </ul>
+          <!-- top bar -->
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+              <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                <div class="input-group">
+                  <input class="form-control" type="text" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </li>
+            <li class="nav-item">
+              <%= link_to logout_path, class:"nav-link" do %>
+                <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    <% end %>
     <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->

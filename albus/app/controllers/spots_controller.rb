@@ -1,4 +1,7 @@
 class SpotsController < ApplicationController
+
+  before_action :authorize, except: [:new, :create]
+
   def index
     @spots=Spot.all.order(:id)
     @lines=Line.all.order(:id)

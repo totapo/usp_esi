@@ -1,6 +1,8 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
 
+  before_action :authorize, except: [:new, :create]
+
   # GET /motorista
   # GET /motorista.json
   def index

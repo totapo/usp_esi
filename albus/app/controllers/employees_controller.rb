@@ -1,6 +1,8 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
+  before_action :authorize, except: [:new, :create]
+
   # GET /funcionarios
   # GET /funcionarios.json
   def index
@@ -11,7 +13,7 @@ class EmployeesController < ApplicationController
   # GET /funcionarios/1.json
   def show
     if(@employee==nil)
-      redirect_to employees_path, notice: 'Employee id not found' 
+      redirect_to employees_path, notice: 'Employee id not found'
     end
   end
 

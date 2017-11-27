@@ -16,8 +16,12 @@ ActiveRecord::Schema.define(version: 20171126004153) do
     t.string   "plate"
     t.string   "model"
     t.integer  "nSeats"
+    t.integer  "driver_id"
+    t.integer  "line_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "index_buses_on_driver_id", using: :btree
+    t.index ["line_id"], name: "index_buses_on_line_id", using: :btree
     t.index ["plate"], name: "index_buses_on_plate", unique: true, using: :btree
   end
 
@@ -40,37 +44,11 @@ ActiveRecord::Schema.define(version: 20171126004153) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "funcionarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "nome"
-    t.string   "cpf"
-    t.string   "email"
-    t.string   "telefone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_lines_on_name", unique: true, using: :btree
-  end
-
-  create_table "motorista", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "nome"
-    t.string   "cpf"
-    t.string   "email"
-    t.string   "telefone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "onibuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "placa"
-    t.string   "modelo"
-    t.integer  "nAcentos"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "routes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

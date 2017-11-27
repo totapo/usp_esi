@@ -8,11 +8,16 @@ class LoginController < ApplicationController
     respond_to do |format|
       if @employee
         session[:user_id] = @employee.id
-        format.html { redirect_to home_path }
+        format.html { redirect_to employees_path }
       else
         format.html { redirect_to new_login_url, notice: 'E-mail ou senha incorretos!' }
       end
     end
+  end
+
+  def logout
+    reset_session
+    redirect_to new_login_path
   end
 
   def employee_params
