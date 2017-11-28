@@ -39,6 +39,7 @@ $('#addRoute').on('click', function(e){
             name: n,
             id: currentLineId
           },
+          routeChanged:rChanged,
           stops:paradas,
           authenticity_token: window._token,
           _method:'put'
@@ -84,7 +85,6 @@ $('#remRoute').on('click', function(e){
         url: "/lines/" + currentLineId,
         dataType: "json",
         data: { _method:"delete",
-                routeChanged:rChanged,
                 authenticity_token: window._token},
         success:function(data){
           window.location.reload(true);
