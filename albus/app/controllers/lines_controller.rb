@@ -1,5 +1,6 @@
 class LinesController < ApplicationController
   before_action :set_line, only: [:destroy, :update]
+  before_action :authorize
 
   def index
     @spots=Spot.all.order(:id)
@@ -8,7 +9,7 @@ class LinesController < ApplicationController
 
   def create
     @line = Line.new
-    @line.name = params[:route][:name]
+    @line.name = params[:line][:name]
     if(@line.save)
 
       @stopAux
@@ -49,7 +50,7 @@ class LinesController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html { redirect_to spots_path, notice: 'Spot was successfully updated.' }
+      format.html { redirect_to lines_path, notice: 'Line was successfully updated.' }
       format.json { head :no_content }
     end
   end
